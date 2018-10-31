@@ -11,7 +11,7 @@ import { List as list } from 'immutable';
 import * as actions from '../../actions/index';
 import { bindActionCreators } from 'redux';
 
-class Home extends Component {
+class Videos extends Component {
 
   handleOpenModal = (id) => {
     this.props.actions.openModal(id);
@@ -25,6 +25,14 @@ class Home extends Component {
     this.setState({
       handleError: true,
     })
+  }
+
+  componentDidMount() {
+     const search = this.props.location.search;
+     if (search) {
+       const id = search.split('=')[1];
+       this.handleOpenModal(id);
+     }
   }
 
   render() {
@@ -79,4 +87,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Home);
+export default connect(mapStateToProps, mapDispatchToProps) (Videos);
